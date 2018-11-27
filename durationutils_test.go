@@ -26,6 +26,15 @@ func TestWith2EachNoConflict(t *testing.T) {
 	assert.EqualValues(t, Duration{300, 400}, dlm[2])
 	assert.EqualValues(t, Duration{450, 490}, dlm[3])
 
+	dlm = MergeDurations(dl2, dl1)
+	assert.Equal(t, 4, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 200}, dlm[0])
+	assert.EqualValues(t, Duration{250, 290}, dlm[1])
+	assert.EqualValues(t, Duration{300, 400}, dlm[2])
+	assert.EqualValues(t, Duration{450, 490}, dlm[3])
+
+
 }
 
 func TestWith2_D1eatsD2(t *testing.T) {
@@ -43,6 +52,14 @@ func TestWith2_D1eatsD2(t *testing.T) {
 	assert.EqualValues(t, Duration{100, 200}, dlm[0])
 	assert.EqualValues(t, Duration{250, 290}, dlm[1])
 	assert.EqualValues(t, Duration{300, 400}, dlm[2])
+
+	dlm = MergeDurations(dl2, dl1)
+	assert.Equal(t, 3, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 200}, dlm[0])
+	assert.EqualValues(t, Duration{250, 290}, dlm[1])
+	assert.EqualValues(t, Duration{300, 400}, dlm[2])
+
 }
 
 func TestWith2ExpandD1(t *testing.T) {
@@ -55,6 +72,12 @@ func TestWith2ExpandD1(t *testing.T) {
 	dl2 = append(dl2, Duration{350, 390})
 
 	dlm := MergeDurations(dl1, dl2)
+	assert.Equal(t, 2, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 290}, dlm[0])
+	assert.EqualValues(t, Duration{300, 400}, dlm[1])
+
+	dlm = MergeDurations(dl2, dl1)
 	assert.Equal(t, 2, len(dlm))
 
 	assert.EqualValues(t, Duration{100, 290}, dlm[0])
@@ -72,6 +95,12 @@ func TestWith2DiffLen1(t *testing.T) {
 	dl2 = append(dl2, Duration{392, 396})
 
 	dlm := MergeDurations(dl1, dl2)
+	assert.Equal(t, 2, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 290}, dlm[0])
+	assert.EqualValues(t, Duration{300, 400}, dlm[1])
+
+	dlm = MergeDurations(dl2, dl1)
 	assert.Equal(t, 2, len(dlm))
 
 	assert.EqualValues(t, Duration{100, 290}, dlm[0])
@@ -94,6 +123,13 @@ func TestWith2DiffLen2(t *testing.T) {
 	assert.EqualValues(t, Duration{100, 290}, dlm[0])
 	assert.EqualValues(t, Duration{300, 400}, dlm[1])
 	assert.EqualValues(t, Duration{492, 496}, dlm[2])
+
+	dlm = MergeDurations(dl2, dl1)
+	assert.Equal(t, 3, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 290}, dlm[0])
+	assert.EqualValues(t, Duration{300, 400}, dlm[1])
+	assert.EqualValues(t, Duration{492, 496}, dlm[2])
 }
 
 func TestNoConflict(t *testing.T) {
@@ -108,6 +144,10 @@ func TestNoConflict(t *testing.T) {
 
 	dlm := HasConflict(dl1, dl2)
 	assert.Equal(t, false, dlm)
+
+	dlm = HasConflict(dl2, dl1)
+	assert.Equal(t, false, dlm)
+
 
 }
 
@@ -125,6 +165,13 @@ func TestWith2Equals(t *testing.T) {
 
 	assert.EqualValues(t, Duration{100, 200}, dlm[0])
 	assert.EqualValues(t, Duration{300, 400}, dlm[1])
+
+
+	dlm = MergeDurations(dl2, dl1)
+	assert.Equal(t, 2, len(dlm))
+
+	assert.EqualValues(t, Duration{100, 200}, dlm[0])
+	assert.EqualValues(t, Duration{300, 400}, dlm[1])
 }
 
 func TestConflictWith2Equals(t *testing.T) {
@@ -138,6 +185,10 @@ func TestConflictWith2Equals(t *testing.T) {
 
 	dlm := HasConflict(dl1, dl2)
 	assert.Equal(t, true, dlm)
+
+	dlm = HasConflict(dl2, dl1)
+	assert.Equal(t, true, dlm)
+
 
 }
 

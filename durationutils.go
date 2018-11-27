@@ -60,8 +60,8 @@ func MergeDurations(one, two []Duration) []Duration {
 				if d2.to < d1.to {
 					// two ends before one ends --> create new with two.from and one.end and replace that with one
 					d1.from = d2.from
-					m1 = true
-					m2 = false
+					m1 = false
+					m2 = true
 				} else {
 					// two ends after one ends --> progress one keep two as is.
 					m1 = true
