@@ -239,6 +239,4 @@ func TestHasOverLap(t *testing.T) {
 	b = HasOverLap(dl)
 	assert.EqualValues(t, false, b)
 
-
 }
-

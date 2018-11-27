@@ -162,18 +162,17 @@ func Sort(one []Duration) {
 	})
 }
 
-
 // HasOverlap goes thru the list of durations and returns true if there's any overlap in any of the
 // duration list
 // It assumes that the list is sorted.
 // if the list is not sorted please call sort first.
-func HasOverLap(dl []Duration) bool{
+func HasOverLap(dl []Duration) bool {
 	dllen := len(dl)
 	for i := 1; i < dllen; i++ {
 		if dl[i].from < dl[i].to {
 			return false
 		}
-		if dl[i - 1].to >= dl[i].from {
+		if dl[i-1].to >= dl[i].from {
 			return false
 		}
 	}
