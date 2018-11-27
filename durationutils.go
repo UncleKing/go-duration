@@ -1,6 +1,8 @@
 package duration
 
-import "sort"
+import (
+	"sort"
+)
 
 type Duration struct {
 	from uint64
@@ -166,9 +168,12 @@ func Sort(one []Duration) {
 // if the list is not sorted please call sort first.
 func HasOverLap(dl []Duration) bool {
 	dllen := len(dl)
-	for i := 1; i < dllen; i++ {
+	for i := 0; i < dllen; i++ {
 		if dl[i].from > dl[i].to {
 			return true
+		}
+		if i == 0 {
+			continue
 		}
 		if dl[i-1].to >= dl[i].from {
 			return true
