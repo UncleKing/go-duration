@@ -118,9 +118,7 @@ func HasConflict(one, two []Duration) bool {
 				m2 = false
 			} else {
 				// one ends after two starts
-
 				// one ends before two ends
-
 				// one ends after two ends
 				return true
 

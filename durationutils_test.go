@@ -34,7 +34,6 @@ func TestWith2EachNoConflict(t *testing.T) {
 	assert.EqualValues(t, Duration{300, 400}, dlm[2])
 	assert.EqualValues(t, Duration{450, 490}, dlm[3])
 
-
 }
 
 func TestWith2_D1eatsD2(t *testing.T) {
@@ -148,7 +147,16 @@ func TestNoConflict(t *testing.T) {
 	dlm = HasConflict(dl2, dl1)
 	assert.Equal(t, false, dlm)
 
+}
 
+func TestConflictReverse(t *testing.T) {
+	var dl1 []Duration
+	var dl2 []Duration
+	dl1 = append(dl1, Duration{100, 200})
+	dl1 = append(dl1, Duration{300, 400})
+	dl2 = append(dl2, Duration{101, 102})
+	dlm := HasConflict(dl1, dl2)
+	assert.Equal(t, true, dlm)
 }
 
 func TestWith2Equals(t *testing.T) {
@@ -165,7 +173,6 @@ func TestWith2Equals(t *testing.T) {
 
 	assert.EqualValues(t, Duration{100, 200}, dlm[0])
 	assert.EqualValues(t, Duration{300, 400}, dlm[1])
-
 
 	dlm = MergeDurations(dl2, dl1)
 	assert.Equal(t, 2, len(dlm))
@@ -188,7 +195,6 @@ func TestConflictWith2Equals(t *testing.T) {
 
 	dlm = HasConflict(dl2, dl1)
 	assert.Equal(t, true, dlm)
-
 
 }
 
@@ -290,8 +296,11 @@ func TestHasOverLap(t *testing.T) {
 	b = HasOverLap(dl)
 	assert.EqualValues(t, true, b)
 
-	dl = append(dl, Duration{500, 495})
-	b = HasOverLap(dl)
-	assert.EqualValues(t, true, b)
+}
 
+func TestHasOverLap2(t *testing.T) {
+	var dl []Duration
+	dl = append(dl, Duration{500, 495})
+	b := HasOverLap(dl)
+	assert.EqualValues(t, true, b)
 }
