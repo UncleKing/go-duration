@@ -169,12 +169,12 @@ func Sort(one []Duration) {
 func HasOverLap(dl []Duration) bool {
 	dllen := len(dl)
 	for i := 1; i < dllen; i++ {
-		if dl[i].from < dl[i].to {
-			return false
+		if dl[i].from > dl[i].to {
+			return true
 		}
 		if dl[i-1].to >= dl[i].from {
-			return false
+			return true
 		}
 	}
-	return true
+	return false
 }

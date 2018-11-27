@@ -288,6 +288,10 @@ func TestHasOverLap(t *testing.T) {
 
 	dl = append(dl, Duration{480, 495})
 	b = HasOverLap(dl)
-	assert.EqualValues(t, false, b)
+	assert.EqualValues(t, true, b)
+
+	dl = append(dl, Duration{500, 495})
+	b = HasOverLap(dl)
+	assert.EqualValues(t, true, b)
 
 }
